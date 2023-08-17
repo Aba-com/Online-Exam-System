@@ -1,0 +1,69 @@
+#include<iostream>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+using namespace std;
+
+// Define a Question structure
+struct Question {
+    string questionText;
+    vector<string> options;
+    int correctOption;
+};
+
+// Function to display questions and collect answers
+int conductExam(const vector<Question>& questions) {
+    int score = 0;
+    
+    for (size_t i = 0; i < questions.size(); ++i) {
+        cout << "Question " << i + 1 << ": " << questions[i].questionText << endl;
+        
+        for (size_t j = 0; j < questions[i].options.size(); ++j) {
+            cout << j + 1 << ". " << questions[i].options[j] << endl;
+        }
+        
+        int userChoice;
+        cout << "Your choice: ";
+        cin >> userChoice;
+        
+        if (userChoice == questions[i].correctOption) {
+            cout << "Correct!" << endl;
+            ++score;
+        } else {
+            cout << "Incorrect!" << endl;
+        }
+        
+        cout << endl;
+    }
+    
+    return score;
+}
+
+int main() {
+    // Create some sample questions
+    vector<Question> questions = {
+        {
+            "What is the capital of France?",
+            {"London", "Paris", "Berlin", "Rome"},
+            2 // Index of correct option
+        },
+        {
+            "Which planet is known as the Red Planet?",
+            {"Venus", "Mars", "Jupiter", "Saturn"},
+            1 // Index of correct option
+        },
+        // Add more questions here...
+    };
+    
+    cout << "Welcome to the Online Exam System!" << endl;
+    cout << "You will be presented with " << questions.size() << " questions." << endl;
+    cout << "Each correct answer gives you 1 point." << endl;
+    
+    // Start the exam
+    int score = conductExam(questions);
+    
+    cout << "Exam completed! Your score: " << score << " out of " << questions.size() << endl;
+    
+    return 0;
+}
